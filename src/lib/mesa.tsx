@@ -113,7 +113,11 @@ export function MesaProvider({ children }: { children: ReactNode }) {
       const { data: s } = await supabase.auth.getSession()
       if (!s.session) {
         const { error } = await supabase.auth.signInAnonymously()
-        if (error) throw new Error('Não deu para abrir sessão. Tenta outra vez daqui a pouco.')
+        if (error) {
+          if (error.code === 'anonymous_provider_disabled' || error.status === 422)
+            throw new Error('O Supabase não tem os logins anónimos ligados (Authentication > Sign In / Providers).')
+          throw new Error('Não deu para abrir sessão. Tenta outra vez daqui a pouco.')
+        }
       }
       const { data, error } = await supabase.rpc('entrar_mesa', { p_codigo: codigo })
       if (error) {
