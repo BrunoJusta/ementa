@@ -1,4 +1,4 @@
-export type Momento = 'pequeno-almoco' | 'brunch' | 'almoco' | 'lanche' | 'jantar'
+export type Momento = 'pequeno-almoco' | 'brunch' | 'almoco' | 'lanche' | 'jantar' | 'sobremesa'
 export type Preco = 1 | 2 | 3 | 4
 
 export interface Sitio {

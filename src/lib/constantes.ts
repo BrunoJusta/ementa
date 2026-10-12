@@ -19,6 +19,7 @@ export const MOMENTOS: { id: Momento; nome: string }[] = [
   { id: 'almoco', nome: 'Almoço' },
   { id: 'lanche', nome: 'Lanche' },
   { id: 'jantar', nome: 'Jantar' },
+  { id: 'sobremesa', nome: 'Sobremesa' },
 ]
 
 export const nomeMomento = (m: Momento) => MOMENTOS.find((x) => x.id === m)?.nome ?? m
