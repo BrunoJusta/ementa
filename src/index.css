@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+@import '@fontsource/caveat-brush/latin-400.css';
+@import '@fontsource/caveat-brush/latin-ext-400.css';
+@import '@fontsource/cormorant-garamond/latin-500-italic.css';
+@import '@fontsource/cormorant-garamond/latin-ext-500-italic.css';
+@import '@fontsource/cormorant-garamond/latin-600-italic.css';
+@import '@fontsource-variable/instrument-sans';
+
+/* Paleta: papel creme + tinta vermelha, com um azul tinta só para detalhes. */
+@theme {
+  --color-papel: #f7f0e4;
+  --color-papel-2: #efe5d4;
+  --color-tinta: #c62a22;
+  --color-tinta-escura: #9e1f19;
+  --color-vinho: #3a1512;
+  --color-vinho-suave: #74443e;
+  --color-azul: #1f4e9c;
+  --color-linha: #dfcfb8;
+
+  --font-mao: 'Caveat Brush', 'Bradley Hand', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-tinta: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-papel);
+    color: var(--color-vinho);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  html,
+  body {
+    overflow-x: clip;
+  }
+  body {
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+  }
+  /* Grão de papel, fixo e sem eventos */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.3 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-azul);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  button,
+  [role='button'],
+  label {
+    touch-action: manipulation;
+  }
+  input,
+  textarea {
+    font-size: 16px; /* evita zoom no iOS */
+  }
+}
+
+@layer components {
+  /* Contorno "desenhado à mão": raios irregulares */
+  .traco {
+    border: 1.75px solid currentColor;
+    border-radius: 255px 18px 225px 16px / 16px 225px 18px 255px;
+  }
+  .traco-2 {
+    border: 1.75px solid currentColor;
+    border-radius: 18px 225px 16px 255px / 255px 16px 225px 18px;
+  }
+  .onda {
+    height: 14px;
+    background-color: var(--color-tinta);
+    -webkit-mask: url('/illus/onda-h.png') repeat-x left center / auto 100%;
+    mask: url('/illus/onda-h.png') repeat-x left center / auto 100%;
+  }
+  .leader {
+    flex: 1;
+    min-width: 12px;
+    border-bottom: 2px dotted var(--color-linha);
+    transform: translateY(-5px);
+  }
+  .sem-scrollbar {
+    scrollbar-width: none;
+  }
+  .sem-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.pb-seguro {
+  padding-bottom: max(env(safe-area-inset-bottom), 12px);
+}
+.pt-seguro {
+  padding-top: max(env(safe-area-inset-top), 16px);
+}
