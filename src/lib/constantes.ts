@@ -7,7 +7,6 @@ export const COZINHAS_BASE = [
   'Italiana',
   'Pizza',
   'Japonesa',
-  'Asiática',
   'Hambúrgueres',
   'Mexicana',
   'Pastelaria e café',
